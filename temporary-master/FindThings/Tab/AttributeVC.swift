@@ -2,13 +2,18 @@
 //  AttributeVC.swift
 //  FindThings
 //
-//  Created by Gaurav Amrutiya on 07/06/18.
-//  Copyright © 2018 Gaurav Amrutiya. All rights reserved.
+//  Created by Chris Lynn on 07/06/18.
+//  Copyright © 2018 Chris Lynn. All rights reserved.
 //
 
 import UIKit
 
-class AttributeVC: UIViewController {
+protocol passAttribute : class
+{
+    func passAttributes(attributeArr:NSArray)
+}
+
+class AttributeVC: UIViewController  {
 
     
     @IBOutlet weak var addAttributeBtn: UIButton!
@@ -16,10 +21,11 @@ class AttributeVC: UIViewController {
     @IBOutlet weak var attributeValueTxt: UITextField!
     @IBOutlet weak var attributeTbl: UITableView!
     @IBOutlet weak var notesTxtVw: UITextView!
-    
-    
+
     var attributeArr = NSMutableArray()
     var selectedAttributeArr = NSMutableArray()
+    var sr = [IndexPath]()
+    weak var delegate: passAttribute?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -102,10 +108,24 @@ extension AttributeVC : UITableViewDelegate
             }
         }
         
-        if let sr = tableView.indexPathsForSelectedRows {
-            print("didDeselectRowAtIndexPath selected rows:\(sr)")
-        }
+        sr = tableView.indexPathsForSelectedRows!
+        iterateSelected()
     }
+    
+    func iterateSelected()
+    {
+        
+        for i in 0...(sr.count-1)
+        {
+            let thisPath = sr[i] as NSIndexPath
+            if(selectedAttributeArr.contains(attributeArr.object(at: thisPath.row))==false)
+            {
+                selectedAttributeArr.add(attributeArr.object(at: thisPath.row))
+            }
+        }
+        print("arr=\(selectedAttributeArr)")
+    }
+   
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
@@ -117,6 +137,27 @@ extension AttributeVC : UITableViewDelegate
         
         if let sr = tableView.indexPathsForSelectedRows {
             print("didDeselectRowAtIndexPath selected rows:\(sr)")
+            selectedAttributeArr=NSMutableArray()
+            for i in 0...(sr.count-1)
+            {
+                let thisPath = sr[i] as NSIndexPath
+                if(selectedAttributeArr.contains(attributeArr.object(at: thisPath.row))==false)
+                {
+                    selectedAttributeArr.add(attributeArr.object(at: thisPath.row))
+                }
+            }
+            print("final after remove =\(selectedAttributeArr)")
+        }
+        else
+        {
+            selectedAttributeArr=NSMutableArray()
+            print("final after remove =\(selectedAttributeArr)")
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        self.delegate?.passAttributes(attributeArr: selectedAttributeArr)
+    }
+    
 }

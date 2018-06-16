@@ -2,8 +2,8 @@
 //  SecondViewController.swift
 //  FindThings
 //
-//  Created by Gaurav Amrutiya on 07/06/18.
-//  Copyright © 2018 Gaurav Amrutiya. All rights reserved.
+//  Created by Chris Lynn on 07/06/18.
+//  Copyright © 2018 Chris Lynn. All rights reserved.
 //
 
 import UIKit

@@ -2,20 +2,23 @@
 //  StoreItemVC.swift
 //  FindThings
 //
-//  Created by Gaurav Amrutiya on 08/06/18.
-//  Copyright © 2018 Gaurav Amrutiya. All rights reserved.
+//  Created by Chris Lynn on 08/06/18.
+//  Copyright © 2018 Chris Lynn. All rights reserved.
 //
 
 import UIKit
 import RATreeView
 
-class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate , RATreeViewDataSource, UIPickerViewDelegate , UIPickerViewDataSource , UITextFieldDelegate {
+
+
+class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate , RATreeViewDataSource, UIPickerViewDelegate , UIPickerViewDataSource , UITextFieldDelegate, passAttribute {
     
     var data:[DataObject] = NSArray() as! [DataObject]
     var treeView : RATreeView!
     var ParticularTree = DataObject(name: "")
     var places : NSMutableArray = []
     var selectedPlaces : String = ""
+    var attributeArr : NSArray = []
     
     
     @IBOutlet weak var itemNameTxt: UITextField!
@@ -39,8 +42,6 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
     
     func setupTreeView() -> Void
     {
-
-       
         placeScrollVw.isHidden = false
         treeView = RATreeView(frame: self.view.bounds)
         treeView.register(UINib(nibName: String(describing: TreeTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TreeTableViewCell.self))
@@ -55,7 +56,20 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
         placeScrollVw.addSubview(treeView)
         placeScrollVw.bringSubview(toFront: treeView)
         treeView.reloadData()
-
+    }
+    
+    func extractPlaces()
+    {
+        let tabBar = tabBarController as! BaseTabbarController
+        
+        for index in 0...tabBar.structure.count-1
+        {
+            let placeArr = tabBar.structure
+            let dict = placeArr[index] as? NSMutableDictionary
+            let placeStr = dict!["name"] as? String
+            places.insert(placeStr!, at: index)
+        }
+        print("places array = \(places)")
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField)
@@ -75,19 +89,11 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
         }
     }
     
-    func extractPlaces()
+    func passAttributes(attributeArr: NSArray)
     {
-        let tabBar = tabBarController as! BaseTabbarController
-        
-        for index in 0...tabBar.structure.count-1
-        {
-            let placeArr = tabBar.structure
-            let dict = placeArr[index] as? NSMutableDictionary
-            let placeStr = dict!["name"] as? String
-            places.insert(placeStr!, at: index)
-        }
-        print("places array = \(places)")
+        self.attributeArr=attributeArr
     }
+    
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -122,18 +128,17 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
             {
                 let tabBar = tabBarController as! BaseTabbarController
                 let itemName = itemNameTxt.text
-//                let dict = NSDictionary.init(objects: [self.ParticularTree.name,[itemNameTxt.text]], forKeys: ["name" as NSCopying,"child" as NSCopying])
-                tabBar.itemArr.add(dict)
+                tabBar.itemArr.add(itemName)
                 
                 let placeArr = tabBar.structure
                 for index in 0...placeArr.count-1
                 {
-                    var dict1 : NSMutableDictionary = placeArr[index] as! NSMutableDictionary
+                    let dict1 : NSMutableDictionary = placeArr[index] as! NSMutableDictionary
                     let nameStr : String = dict1["name"] as! String
                     let placeStr : String = placeTxt.text!
                     if(nameStr == placeStr)
                     {
-                        var childArr = NSMutableArray()
+                        let childArr = NSMutableArray()
                         childArr.add(self.itemNameTxt.text as! String)
                         dict1["child"] = childArr
                         break
@@ -142,15 +147,58 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
                 print("structure=\(tabBar.structure)")
                 
                 print("itemArray=\(tabBar.itemArr.description)")
+                self.createItemModel(ChildName: "", ParentName:self.placeTxt.text!)
                 self.navigationController?.popViewController(animated: true)
             }
         }
     }
     
-    @IBAction func AddAttributeAction(_ sender: Any)
+    func createItemModel(ChildName:String,ParentName:String)
     {
         
+        let tabBar = tabBarController as! BaseTabbarController
+        
+        print(ParentName,ChildName)
+        
+//        var childName:String
+//
+//        for ind in 0...ParticularTree.children.count-1
+//        {
+//            let child = ParticularTree.children[ind]
+//            print(child.name)
+//
+//        }
+        
+        self.extractChild(child:[ParticularTree])
+        
+        
+//        let mItem = itemModel(name: itemNameTxt.text!, storedAt: tabBar.itemArr, attributes: attributeArr)
+//        print(mItem)
     }
+    
+    @IBAction func AddAttributeAction(_ sender: Any)
+    {
+//        if let nav = .destination as? UINavigationController, let classBVC = nav.topViewController as? ClassBVC {
+//            classBVC.delegate = self
+//        }
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let objAttribute = storyBoard.instantiateViewController(withIdentifier: "attributeID") as! AttributeVC
+        objAttribute.delegate=self
+        self.navigationController?.pushViewController(objAttribute, animated: true)
+    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        if let nav = segue.destination as? UINavigationController, let objAttributeVC = nav.topViewController as? AttributeVC
+//        {
+//            objAttributeVC.delegate = self
+//        }
+//        
+//    }
+    
+    
+    //MARK: picker methods
     
     @IBAction func doneAction(_ sender: Any)
     {
@@ -173,6 +221,7 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
         }
         
         print("parent aray=\(ParticularTree)")
+        
         self.setupTreeView()
         treeView.reloadData()
     }
@@ -182,9 +231,6 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
         placesPicker.isHidden=true
         placeTxt.text = ""
     }
-    
-    
-
     
     
     //MARK: RATreeView data source
@@ -222,6 +268,8 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
         cell.additionButtonActionBlock = { [weak treeView] cell in
             
             let item=(treeView?.item(for: cell) as! DataObject)
+            
+            
             print("item stored here=\(treeView?.item(for: cell) as! DataObject)")
             
             let stored = UIAlertController(title:"Successfully Stored", message:"Your Item is stored In\(item.name)", preferredStyle: UIAlertControllerStyle.alert)
@@ -238,7 +286,7 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
                     return;
                 }
                 let item = treeView.item(for: cell) as! DataObject
-               
+//                self.iterate(item: item)
                 let tabBar = self.tabBarController as! BaseTabbarController
                 let placeArr = tabBar.structure
                 for index in 0...placeArr.count-1
@@ -253,8 +301,12 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
                                 let childItem = childArr[m] as! String
                                 if(childItem == item.name)
                                 {
+                                    
+                                    
+//                                    self.iterate(item: item)
                                     childArr.add(self.itemNameTxt.text as! String)
                                     tabBar.itemArr.add(self.itemNameTxt.text as! String)
+                                    self.createItemModel(ChildName:item.name, ParentName:self.placeTxt.text!)
                                     break
                                 }
                             }
@@ -269,6 +321,46 @@ class  StoreItemVC: UIViewController , UIScrollViewDelegate , RATreeViewDelegate
         }
         return cell
     }
+    
+    func extractChild(child:[DataObject])
+    {
+        for index in 0...child.count-1
+        {
+            let parent = child[index]
+            if(parent.name == "Phone 4")
+            {
+                break;
+            }
+            print("name=\(parent.name)")
+            let child:[DataObject] = parent.children
+            
+            if(child.count != 0)
+            {
+                if(parent.name != "Phone 4")
+                {
+                    print("child")
+                    extractChild(child:child)
+                }
+            }
+        }
+    }
+
+    
+//    func iterate(item:DataObject)
+//    {
+//        for ind in 0...self.data.count-1
+//        {
+//            let parent = self.data[ind]
+//            let child = self.data[ind].children
+//        }
+//
+//
+//        let name = item.name
+//
+//
+//
+////        self.extractChild(child: [item], Px: 0, Py: &0)
+//    }
     
     //MARK: RATreeView delegate
     

@@ -104,23 +104,23 @@
             </objects>
             <point key="canvasLocation" x="1478" y="359"/>
         </scene>
-        <!--Suggestion TblVC-->
+        <!--Search-->
         <scene sceneID="VFj-kb-L5r">
             <objects>
-                <tableViewController id="F4B-C7-M7k" customClass="suggestionTblVC" customModule="FindThings" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Search" id="F4B-C7-M7k" customClass="suggestionTblVC" customModule="FindThings" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" id="SRz-Qb-MKj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="ECZ-9q-41w" style="IBUITableViewCellStyleDefault" id="gMA-8p-NsF">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="Xk7-F7-9mG" style="IBUITableViewCellStyleDefault" id="PpK-7x-Yfh">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gMA-8p-NsF" id="VT3-pL-GNG">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PpK-7x-Yfh" id="OiA-Zf-C26">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ECZ-9q-41w">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xk7-F7-9mG">
                                             <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -131,12 +131,13 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="F4B-C7-M7k" id="whY-1j-hjg"/>
                             <outlet property="delegate" destination="F4B-C7-M7k" id="7N3-Lk-Wc0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="0F7-Hy-beq"/>
+                    <navigationItem key="navigationItem" title="Search" id="0F7-Hy-beq"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhX-86-2Q0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -171,7 +172,6 @@
                                 <state key="normal" title="Add Attributes"/>
                                 <connections>
                                     <action selector="AddAttributeAction:" destination="ah2-fm-vcW" eventType="touchUpInside" id="IgM-4D-rWs"/>
-                                    <segue destination="Dgg-zH-sd8" kind="show" id="tzx-wW-qLJ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attributes :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NsW-9Z-snp">
@@ -298,6 +298,7 @@
                         <outlet property="placesPicker" destination="Nz7-hP-afM" id="QC1-G8-obC"/>
                         <outlet property="storeBtn" destination="kyI-11-ZHV" id="LDE-Zv-Xi3"/>
                         <outlet property="toolbar" destination="9Iq-vI-2A0" id="sL8-LV-wll"/>
+                        <segue destination="Dgg-zH-sd8" kind="showDetail" identifier="attributeID" id="4Eh-dF-Utx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="umt-HP-l5D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -307,13 +308,13 @@
         <!--Attribute-->
         <scene sceneID="i6x-1f-024">
             <objects>
-                <viewController title="Attribute" id="Dgg-zH-sd8" customClass="AttributeVC" customModule="FindThings" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="attributeID" title="Attribute" id="Dgg-zH-sd8" customClass="AttributeVC" customModule="FindThings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZSd-Gy-CvN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attribute Name :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D62-Gj-pqI">
-                                <rect key="frame" x="12" y="84" width="126" height="30"/>
+                                <rect key="frame" x="12" y="40" width="126" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0bS-gE-MIQ"/>
                                     <constraint firstAttribute="width" constant="126" id="uZZ-Xr-oga"/>
@@ -323,7 +324,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-Do-yVx">
-                                <rect key="frame" x="158" y="84" width="205" height="30"/>
+                                <rect key="frame" x="158" y="40" width="205" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="mTG-cb-Pxy"/>
                                 </constraints>
@@ -332,7 +333,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attribute Value :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiL-Sz-vbI">
-                                <rect key="frame" x="12" y="134" width="123" height="30"/>
+                                <rect key="frame" x="12" y="90" width="123" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Rwa-Ie-flO"/>
                                     <constraint firstAttribute="width" constant="123" id="f1l-0f-iwi"/>
@@ -342,7 +343,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t24-30-eEE">
-                                <rect key="frame" x="158" y="134" width="205" height="30"/>
+                                <rect key="frame" x="158" y="90" width="205" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="V5I-Mo-Ov1"/>
                                 </constraints>
@@ -351,7 +352,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er el" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YfI-3Z-fBq">
-                                <rect key="frame" x="158" y="184" width="205" height="58"/>
+                                <rect key="frame" x="158" y="140" width="205" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="3cR-7J-Shj"/>
@@ -360,7 +361,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-ec-p8g">
-                                <rect key="frame" x="12" y="198" width="76" height="30"/>
+                                <rect key="frame" x="12" y="154" width="76" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="76" id="FgA-fw-nxZ"/>
                                     <constraint firstAttribute="height" constant="30" id="Vyz-bG-RRf"/>
@@ -370,7 +371,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6jh-cD-ELh">
-                                <rect key="frame" x="0.0" y="312" width="375" height="306"/>
+                                <rect key="frame" x="0.0" y="268" width="375" height="399"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="6t0-Sa-mM0" detailTextLabel="dW3-VA-FQe" style="IBUITableViewCellStyleValue1" id="ane-E3-A37">
@@ -421,7 +422,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p1b-A9-RHU">
-                                <rect key="frame" x="119.5" y="262" width="136" height="30"/>
+                                <rect key="frame" x="119.5" y="218" width="136" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="136" id="SwA-lR-Ngt"/>
                                     <constraint firstAttribute="height" constant="30" id="bF6-zw-Fuw"/>
@@ -482,8 +483,8 @@
                     <connections>
                         <outlet property="delegate" destination="W28-zg-YXA" id="44g-zj-tj9"/>
                         <segue destination="LMs-Zg-D4F" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="dmZ-nQ-LI1" kind="relationship" relationship="viewControllers" id="R3v-Xe-EAd"/>
                         <segue destination="b6G-Ka-HqE" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="dmZ-nQ-LI1" kind="relationship" relationship="viewControllers" id="R3v-Xe-EAd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -532,7 +533,7 @@
         <scene sceneID="rm2-r0-tJy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dmZ-nQ-LI1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search Items" id="zx3-UI-2ql"/>
+                    <tabBarItem key="tabBarItem" title="Search Items" image="second" id="zx3-UI-2ql"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SyE-Rf-a8J">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

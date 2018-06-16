@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19A3BE7F20D42B15004B2D13 /* itemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A3BE7E20D42B15004B2D13 /* itemModel.swift */; };
 		19BA0F9220CCDB1300FCCA3B /* BaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BA0F9120CCDB1300FCCA3B /* BaseTabbarController.swift */; };
 		19C2799C20C99B91002346DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C2799B20C99B91002346DA /* AppDelegate.swift */; };
 		19C2799E20C99B91002346DA /* ManageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C2799D20C99B91002346DA /* ManageVC.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		0CAAB1ACBD4018F93C123DC8 /* Pods_FindThings.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindThings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19A3BE7E20D42B15004B2D13 /* itemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemModel.swift; sourceTree = "<group>"; };
 		19BA0F9120CCDB1300FCCA3B /* BaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabbarController.swift; sourceTree = "<group>"; };
 		19C2799820C99B91002346DA /* FindThings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindThings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19C2799B20C99B91002346DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,9 +60,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19A3BE7D20D42B02004B2D13 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19A3BE7E20D42B15004B2D13 /* itemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		19C2798F20C99B91002346DA = {
 			isa = PBXGroup;
 			children = (
+				19A3BE7D20D42B02004B2D13 /* Model */,
 				19C2799A20C99B91002346DA /* FindThings */,
 				19C2799920C99B91002346DA /* Products */,
 				CF57005D3FA31587C424B5EA /* Pods */,
@@ -169,7 +180,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0910;
-				ORGANIZATIONNAME = "Gaurav Amrutiya";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					19C2799720C99B91002346DA = {
 						CreatedOnToolsVersion = 9.1;
@@ -260,6 +271,7 @@
 				19C279B820C9AE81002346DA /* AttributeVC.swift in Sources */,
 				19C279B420C99F82002346DA /* TreeTableViewCell.swift in Sources */,
 				19C2799C20C99B91002346DA /* AppDelegate.swift in Sources */,
+				19A3BE7F20D42B15004B2D13 /* itemModel.swift in Sources */,
 				19FA024120CAE12600514484 /* StoreItemVC.swift in Sources */,
 				19C2799E20C99B91002346DA /* ManageVC.swift in Sources */,
 				19C279B620C99F82002346DA /* DataObject.swift in Sources */,

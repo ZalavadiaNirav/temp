@@ -3,7 +3,7 @@
 //  FindThings
 //
 //  Created by Nirav Zalavadia on 15/06/18.
-//  Copyright © 2018 Gaurav Amrutiya. All rights reserved.
+//  Copyright © 2018 Chris Lynn. All rights reserved.
 //
 
 import Foundation
